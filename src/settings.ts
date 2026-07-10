@@ -7,7 +7,7 @@ export interface SimpleHomepageSettings {
 }
 
 export const DEFAULT_SETTINGS: SimpleHomepageSettings = {
-	path: 'default',
+	path: 'Home.md',
 };
 
 export class SimpleHomepageSettingTab extends PluginSettingTab {
@@ -20,7 +20,6 @@ export class SimpleHomepageSettingTab extends PluginSettingTab {
 
 	display(): void {
 		const { containerEl } = this;
-
 		containerEl.empty();
 
 		new Setting(containerEl)
@@ -28,12 +27,16 @@ export class SimpleHomepageSettingTab extends PluginSettingTab {
 			.setDesc("Enter the path to use as your homepage.")
 			.addText((text) => {
 				text
-					.setPlaceholder('/Home')
+					.setPlaceholder('Home.md')
 					.setValue(this.plugin.settings.path)
-					.onChange(async (value) => {
-						this.plugin.settings.path = value;
-						await this.plugin.saveSettings();
-					}),
-			);
+          .inputEl.addEventListener('blur', () => {
+            text.setValue(this.plugin.settings.path);
+          });
+
+        new FileSuggest(this.app, text.inputEl).onSelect(async (file) => {
+          this.plugin.settings.path = file.path;
+          await this.plugin.saveSettings();
+        });
+      });
 	}
 }
