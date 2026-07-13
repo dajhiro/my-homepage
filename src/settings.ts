@@ -4,10 +4,12 @@ import SimpleHomepage from './main';
 
 export interface SimpleHomepageSettings {
 	path: string;
+  onStartup: boolean;
 }
 
 export const DEFAULT_SETTINGS: SimpleHomepageSettings = {
 	path: 'Home.md',
+  onStartup: false
 };
 
 export class SimpleHomepageSettingTab extends PluginSettingTab {
@@ -35,6 +37,16 @@ export class SimpleHomepageSettingTab extends PluginSettingTab {
 
         new FileSuggest(this.app, text.inputEl).onSelect(async (file) => {
           this.plugin.settings.path = file.path;
+          await this.plugin.saveSettings();
+        });
+      });
+
+    new Setting(containerEl)
+      .setName('Startup')
+      .setDesc("Open the homepage automatically on startup.")
+      .addToggle((toggle) => {
+        toggle.setValue(this.plugin.settings.onStartup).onChange(async (value) => {
+          this.plugin.settings.onStartup = value;
           await this.plugin.saveSettings();
         });
       });

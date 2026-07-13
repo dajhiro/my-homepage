@@ -17,6 +17,14 @@ export default class SimpleHomepage extends Plugin {
       name: "Open homepage",
       callback: () => openHomepage(this.app, this.settings.path),
     });
+
+    // Startup
+    this.app.workspace.onLayoutReady(() => {
+      if (!this.settings.onStartup) return ;
+      if (this.app.workspace.getMostRecentLeaf()?.view.getViewType() !== 'empty') return ;
+
+      void openHomepage(this.app, this.settings.path);
+    });
   }
 
 	async loadSettings() {
