@@ -3,7 +3,7 @@
 	"name": "Simple Homepage",
 	"version": "0.0.1",
 	"minAppVersion": "1.6.6",
-	"description": "A simple homepage plugin that behaves like a web browser",
+	"description": "Set a note as your homepage and open it automatically on startup or with a command.",
 	"author": "Dajhiro",
 	"authorUrl": "https://github.com/dajhiro",
 	"fundingUrl": "https://ko-fi.com/dajhiro",
