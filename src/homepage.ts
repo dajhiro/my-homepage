@@ -1,18 +1,32 @@
 import { APP_NAME } from './main';
 import { App, Notice } from 'obsidian';
 
-export async function openHomepage(app: App, path: string): Promise<void> {
-  const file = app.vault.getFileByPath(path);
+export type OpenMode = 'current' | 'tab' | 'split' | 'window';
 
+export async function openHomepage(
+  app: App,
+  homepagePath: string,
+  mode: OpenMode = 'current',
+): Promise<void> {
+  const file = app.vault.getFileByPath(homepagePath);
   if (!file) {
-    new Notice(`${APP_NAME}: File not found.\nPath: ${path}`);
+    new Notice(`${APP_NAME}: File not found.\nPath: ${homepagePath}`);
     return ;
   }
 
-  if (app.workspace.getActiveFile()?.path === file.path) {
+  if (mode === 'current' && app.workspace.getActiveFile()?.path === file.path) {
     new Notice(`${APP_NAME}: Already open!`, 1000);
     return ;
   }
 
-  await app.workspace.getLeaf().openFile(file);
+  const leaf = 
+    mode === 'current'
+      ? app.workspace.getLeaf(false)
+      : mode === 'window'
+        ? app.workspace.getLeaf('window')
+        : mode === 'split'
+          ? app.workspace.getLeaf('split')
+          : app.workspace.getLeaf('tab');
+
+  await leaf.openFile(file);
 }
