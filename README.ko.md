@@ -10,40 +10,40 @@
 
 ## 설치 (Installation)
 
-### Obsidian 내에서 설치
-
 1. **설정 → 커뮤니티 플러그인**을 엽니다.
 2. **찾아보기**를 선택하고 "Simple Homepage"를 검색합니다.
 3. **설치**를 선택한 다음 **활성화**합니다.
-
-### 수동 설치
-
-1. [최신 릴리스](https://github.com/dajhiro/obsidian-simple-homepage/releases)에서 `main.js`와 `manifest.json`을 다운로드합니다.
-2. 볼트의 `.obsidian/plugins/` 폴더 안에 `simple-homepage` 폴더를 만듭니다.
-3. 다운로드한 파일들을 해당 폴더에 복사합니다.
-4. Obsidian을 다시 불러온 뒤 **설정 → 커뮤니티 플러그인**에서 **Simple Homepage**를 활성화합니다.
 
 ## 사용법 (Usage)
 
 1. **설정 → Simple Homepage**를 엽니다.
 2. 홈페이지로 사용할 노트를 **Path**에 지정합니다.
-3. 필요하다면 **Startup**을 활성화하여, Obsidian이 빈 탭으로 시작할 때 홈페이지가 자동으로 열리도록 설정합니다.
-4. 언제든지 **Open homepage** 명령(커맨드 팔레트 또는 단축키)으로 홈페이지를 열 수 있습니다.
+3. 필요하다면 **Open on startup**을 활성화하여, Obsidian이 빈 탭으로 시작할 때 홈페이지가 자동으로 열리도록 설정합니다.
+4. 언제든지 **Open homepage** 명령(커맨드 팔레트 또는 단축키)이나 리본 아이콘으로 홈페이지를 열 수 있습니다.
 
 ## 기능 (Features)
 
 ### 현재
 - **Command**: 홈페이지를 여는 명령 제공
   - 이 명령을 실행하면, 이미 홈페이지가 열린 탭이 존재하더라도 이를 무시하고 새로 홈페이지를 엽니다.
-- **Startup**: Obsidian을 시작했을 때 빈 탭밖에 없다면 홈페이지를 자동으로 엽니다.
+- **Open on startup**: Obsidian을 시작했을 때 빈 탭밖에 없다면 홈페이지를 자동으로 엽니다.
 
-### Deprecated
-- ~~리본 아이콘~~
-  - 저는 단축키를 사용하기 때문에 리본 아이콘은 불필요하다고 느꼈습니다.
+### 리본 아이콘 (Ribbon Icon)
+- `Click` — 현재 탭
+- `Shift-Click` — 새 창
+- `Ctrl-Click` — 새 탭
+- `Alt-Click` — 분할
 
 ## Todo: Done
 - [x] 빈 탭으로 시작할 때 홈페이지 열기
 - [x] 여는 성능 개선
+- [x] 여는 방식을 선택할 수 있는 리본 아이콘 추가
+
+## Todo
+- [ ] `Ctrl-Click` — 새 탭 (화면 안 옮김)
+- [ ] `Ctrl-Shift-Click` — 새 탭 (화면 옮김)
+- [ ] `Right-Click` — 컨텍스트 메뉴 (옵션 / 끄기)
+  - 다른 코어/커뮤니티 플러그인 관례에 따라 구현하지 않을 가능성이 높습니다.
 
 ## 감사의 말 (Acknowledgements)
 [obsidian-homepage](https://github.com/novov/obsidian-homepage) (제작자: novov)에서 영감을 받았습니다. 저의 첫 Obsidian 플러그인인 만큼, novov님의 코드를 많이 참조하였습니다.
