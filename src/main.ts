@@ -13,17 +13,16 @@ export default class SimpleHomepage extends Plugin {
 
     // Command: Simple Homepage: Open Homepage
     this.addCommand({
-      id: "open-homepage",
+      id: 'open-homepage',
       name: "Open homepage",
-      callback: () => openHomepage(this.app, this.settings.path),
+      callback: () => openHomepage(this.app, this.settings.homepagePath),
     });
 
-    // Startup
+    // on Startup: Open Homepage
     this.app.workspace.onLayoutReady(() => {
-      if (!this.settings.onStartup) return ;
+      if (!this.settings.openOnStartup) return ;
       if (this.app.workspace.getMostRecentLeaf()?.view.getViewType() !== 'empty') return ;
-
-      void openHomepage(this.app, this.settings.path);
+      void openHomepage(this.app, this.settings.homepagePath);
     });
   }
 

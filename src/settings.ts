@@ -3,13 +3,13 @@ import { FileSuggest } from './suggest';
 import SimpleHomepage from './main';
 
 export interface SimpleHomepageSettings {
-	path: string;
-  onStartup: boolean;
+	homepagePath: string;
+  openOnStartup: boolean;
 }
 
 export const DEFAULT_SETTINGS: SimpleHomepageSettings = {
-	path: 'Home.md',
-  onStartup: false
+	homepagePath: 'Home.md',
+  openOnStartup: false
 };
 
 export class SimpleHomepageSettingTab extends PluginSettingTab {
@@ -30,25 +30,27 @@ export class SimpleHomepageSettingTab extends PluginSettingTab {
 			.addText((text) => {
 				text
 					.setPlaceholder('Home.md')
-					.setValue(this.plugin.settings.path)
+					.setValue(this.plugin.settings.homepagePath)
           .inputEl.addEventListener('blur', () => {
-            text.setValue(this.plugin.settings.path);
+            text.setValue(this.plugin.settings.homepagePath);
           });
 
         new FileSuggest(this.app, text.inputEl).onSelect(async (file) => {
-          this.plugin.settings.path = file.path;
+          this.plugin.settings.homepagePath = file.path;
           await this.plugin.saveSettings();
         });
       });
 
     new Setting(containerEl)
-      .setName('Startup')
-      .setDesc("Open the homepage automatically on startup.")
+      .setName('Open on startup')
+      .setDesc("Automatically open the homepage on startup when the workspace is empty.")
       .addToggle((toggle) => {
-        toggle.setValue(this.plugin.settings.onStartup).onChange(async (value) => {
-          this.plugin.settings.onStartup = value;
-          await this.plugin.saveSettings();
-        });
+        toggle
+          .setValue(this.plugin.settings.openOnStartup)
+          .onChange(async (value) => {
+            this.plugin.settings.openOnStartup = value;
+            await this.plugin.saveSettings();
+          });
       });
 	}
 }
